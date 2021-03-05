@@ -1,0 +1,79 @@
+.footer .copyright {
+  background-color: #333;
+  padding: 1rem;
+  color: #fff;
+}
+
+.pagecontent {
+  font-size: 1.2rem;
+}
+.pagecontent .error {
+  font-size: 5rem;
+  font-weight: bold;
+}
+.pagecontent .error .fa-surprise {
+  color: #0cb660 !important;
+}
+
+.pageinfo {
+  border-bottom: 1px solid #cccccc42;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  padding-top: 1rem;
+  margin-top: 1rem;
+  align-items: center;
+}
+.pageinfo .logo {
+  width: 120px;
+  height: 120px;
+}
+.pageinfo .user-title {
+  margin-top: 50px;
+}
+
+.tab-content .process-title {
+  border-bottom: 1px solid #cccccc42;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+.tab-content .tile {
+  background-color: #ffffff;
+  box-sizing: content-box;
+  box-shadow: 2px 2px 9px 5px #eee;
+  padding: 2rem;
+  margin-bottom: 1rem;
+  min-height: 100px;
+  max-height: 100px;
+  font-size: 1.2rem;
+}
+.tab-content .tile .process-link {
+  color: #333;
+  text-decoration: none;
+}
+.tab-content .tile .process-link:hover {
+  color: #016fc4;
+}
+
+.page-title {
+  background-color: #333;
+  padding: 6px;
+  margin: 10px;
+  border-radius: 7px;
+  color: #fff;
+}
+
+.branch-data {
+  background-color: #0096885e;
+  margin-bottom: 1rem;
+  border-radius: 12px;
+  border: solid 3px #0cb660;
+}
+.branch-data .lead {
+  font-weight: bold;
+  color: #000;
+}
+
+.main {
+  border-bottom: 1px solid #bdbcbc5e;
+  margin-bottom: 1rem;
+}
