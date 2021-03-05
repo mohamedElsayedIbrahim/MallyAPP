@@ -28,6 +28,11 @@ class CourceController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'CourseName'=>'required|string|max:100',
+            'CoursePrice'=>'required|string'
+        ]);
+
         Cource::insert([
             'title'=>$request->input('CourseName'),
             'desc'=>$request->input('CourseDesc'),
@@ -49,6 +54,11 @@ class CourceController extends Controller
 
     public function update($id,Request $request)
     {
+        $request->validate([
+            'CourseName'=>'required|string|max:100',
+            'CoursePrice'=>'required|string'
+        ]);
+        
         Cource::findorfail($id)->update([
             'title'=>$request->input('CourseName'),
             'desc'=>$request->input('CourseDesc'),

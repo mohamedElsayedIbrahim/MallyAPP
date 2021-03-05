@@ -31,25 +31,25 @@
     </p>
 </div>
 
-
+            @include('inc.error')
             <form accept-charset="utf8" enctype="multipart/form-data" method="POST" action="{{ route('course.update',$cource->id) }}" class="mb-5">
                 @csrf
                 <div class="form-floating mb-3">
-                    <input type="text" name="CourseName" required value="{{$cource->title}}" class="form-control" id="floatingInputName" placeholder="enter course name">
+                    <input type="text" name="CourseName" value="{{ old('CourseName')?? $cource->title}}" class="form-control" id="floatingInputName" placeholder="enter course name">
                     <label for="floatingInput">course name</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="number" name="CoursePrice" value="{{$cource->price}}" required class="form-control" id="floatingInputPrice" placeholder="enter course price">
+                    <input type="number" name="CoursePrice" value="{{old('CoursePrice')?? $cource->price}}" required class="form-control" id="floatingInputPrice" placeholder="enter course price">
                     <label for="floatingInput">course price</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="number" name="CourseDiscount" value="{{$cource->disccount}}" class="form-control" id="floatingInputOffer" placeholder="enter course dicscount">
+                    <input type="number" name="CourseDiscount" value="{{old('CourseDiscount')?? $cource->disccount}}" class="form-control" id="floatingInputOffer" placeholder="enter course dicscount">
                     <label for="floatingInput">course discount</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <textarea rows="12" cols="5" name="CourseDesc" class="form-control" id="floatingInputDesc" placeholder="enter course Description">{{$cource->desc}}</textarea>
+                    <textarea rows="12" cols="5" name="CourseDesc" class="form-control" id="floatingInputDesc" placeholder="enter course Description">{{old('CourseDesc')?? $cource->desc}}</textarea>
                     <label for="floatingInput">course Description</label>
                 </div>
 

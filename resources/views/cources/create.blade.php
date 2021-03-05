@@ -31,24 +31,25 @@
     </p>
 </div>
 
+@include('inc.error')
             <form accept-charset="utf8" enctype="multipart/form-data" method="POST" action="{{ route('course.store') }}" class="mb-5">
                 @csrf
                 <div class="form-floating mb-3">
-                    <input type="text" name="CourseName" required class="form-control" id="floatingInputName" placeholder="enter course name">
+                    <input type="text" name="CourseName" class="form-control" id="floatingInputName" placeholder="enter course name" value="{{old('CourseName')}}">
                     <label for="floatingInput">course name</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="number" name="CoursePrice" required class="form-control" id="floatingInputPrice" placeholder="enter course price">
+                    <input type="number" name="CoursePrice" class="form-control" id="floatingInputPrice" placeholder="enter course price" value="{{old('CoursePrice')}}">
                     <label for="floatingInput">course price</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="number" name="CourseDiscount" class="form-control" id="floatingInputOffer" placeholder="enter course dicscount">
+                    <input type="number" value="{{old('CourseDiscount')}}" name="CourseDiscount" class="form-control" id="floatingInputOffer" placeholder="enter course dicscount">
                     <label for="floatingInput">course discount</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <textarea rows="12" cols="5" name="CourseDesc" class="form-control" id="floatingInputDesc" placeholder="enter course Description"></textarea>
+                    <textarea rows="12" cols="5" name="CourseDesc" class="form-control" id="floatingInputDesc" placeholder="enter course Description">{{old('CourseDesc')}}</textarea>
                     <label for="floatingInput">course Description</label>
                 </div>
 
