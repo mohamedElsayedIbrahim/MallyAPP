@@ -34,20 +34,22 @@ class CourceController extends Controller
             'CourseImage'=>'image|mimes:jpg,bmp,png',
         ]);
 
-        //move images
+        $name=null;
 
-        $image = $request->file('CourseImage');
-        $ext = $image->getClientOriginalExtension();
-        $name = "course-".uniqid().$ext;
-        $image->move(public_path('uploads/courses',$name));
+        //move images
+        if($request->hasFile('CourseImage')){
+            $image = $request->file('CourseImage');
+            $ext = $image->getClientOriginalExtension();
+            $name = "course-".uniqid().".$ext";
+            $image->move( public_path('uploads/courses') ,$name);
+        }
 
         Cource::create([
             'title'=>$request->input('CourseName'),
             'desc'=>$request->input('CourseDesc'),
             'disccount'=>$request->input('CourseDiscount'),
             'price'=>$request->input('CoursePrice'),
-            'image'=>$name,
-
+            'image'=>$name
         ]);
 
         return redirect(route('course.index'));
@@ -65,23 +67,30 @@ class CourceController extends Controller
         $request->validate([
             'CourseName'=>'required|string|max:100',
             'CoursePrice'=>'required|string',
-            'CourseImage'=>'mimes:jpg,bmp,png',
+            'CourseImage'=>'nullable|image|mimes:jpg,bmp,png',
         ]);
         
+        $course = Cource::findorfail($id);
+        $name = $course->image;
         //move images
+        if($request->hasFile('CourseImage')){
 
-        $image = $request->file('CourseImage');
-        $ext = $image->getClientOriginalExtension();
-        $name = "course-".uniqid().$ext;
-        $image->move(public_path('uploads/courses',$name));
+            if($course->image !== null){
+                unlink(public_path('uploads/courses'.$course->image));
+            }
 
-        Cource::findorfail($id)->update([
+            $image = $request->file('CourseImage');
+            $ext = $image->getClientOriginalExtension();
+            $name = "course-".uniqid().".$ext";
+            $image->move(public_path('uploads/courses'),$name);
+        }
+
+        $course->update([
             'title'=>$request->input('CourseName'),
             'desc'=>$request->input('CourseDesc'),
             'disccount'=>$request->input('CourseDiscount'),
             'price'=>$request->input('CoursePrice'),
-            'image'=>$name--,
-
+            'image'=>$name,
         ]);
 
         return redirect(route('course.edit',$id));
@@ -89,7 +98,12 @@ class CourceController extends Controller
 
     public function delete($id)
     {
-        Cource::findorfail($id)->delete();
+        $course = Cource::findorfail($id);
+
+        if($course->image !== null){
+            unlink(public_path('uploads/courses/'.$course->image));
+        }
+        $course->delete();
 
         return redirect(route('course.index'));
     }
