@@ -30,15 +30,23 @@ class CourceController extends Controller
     {
         $request->validate([
             'CourseName'=>'required|string|max:100',
-            'CoursePrice'=>'required|string'
+            'CoursePrice'=>'required|string',
+            'CourseImage'=>'image|mimes:jpg,bmp,png',
         ]);
 
-        Cource::insert([
+        //move images
+
+        $image = $request->file('CourseImage');
+        $ext = $image->getClientOriginalExtension();
+        $name = "course-".uniqid().$ext;
+        $image->move(public_path('uploads/courses',$name));
+
+        Cource::create([
             'title'=>$request->input('CourseName'),
             'desc'=>$request->input('CourseDesc'),
             'disccount'=>$request->input('CourseDiscount'),
             'price'=>$request->input('CoursePrice'),
-            'image'=>$request->input('CourseImage'),
+            'image'=>$name,
 
         ]);
 
@@ -56,15 +64,23 @@ class CourceController extends Controller
     {
         $request->validate([
             'CourseName'=>'required|string|max:100',
-            'CoursePrice'=>'required|string'
+            'CoursePrice'=>'required|string',
+            'CourseImage'=>'mimes:jpg,bmp,png',
         ]);
         
+        //move images
+
+        $image = $request->file('CourseImage');
+        $ext = $image->getClientOriginalExtension();
+        $name = "course-".uniqid().$ext;
+        $image->move(public_path('uploads/courses',$name));
+
         Cource::findorfail($id)->update([
             'title'=>$request->input('CourseName'),
             'desc'=>$request->input('CourseDesc'),
             'disccount'=>$request->input('CourseDiscount'),
             'price'=>$request->input('CoursePrice'),
-            'image'=>$request->input('CourseImage'),
+            'image'=>$name--,
 
         ]);
 
